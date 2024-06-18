@@ -21,11 +21,15 @@ public class Team {
      */
     private String location;
     /**
-     * True if anybody can join, false if private.
+     * True if group is private and only accept new members via invite.
      */
-    private boolean isOpen;
+    private boolean privateGroup;
+    private Long groupAdminId;
     @ManyToMany
+    @JoinTable(
+            name = "user_team",
+            joinColumns = @JoinColumn(name = "team_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
     private List<User> members = new ArrayList<>();
-    @OneToOne
-    private User groupAdmin;
 }

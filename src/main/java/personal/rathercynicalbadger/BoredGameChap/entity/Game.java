@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,6 +27,11 @@ public class Game {
      * Average play time in minutes.
      */
     private int playtime;
-    @OneToMany
-    private List<Expansion> expansions = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "user_game",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> owners;
 }

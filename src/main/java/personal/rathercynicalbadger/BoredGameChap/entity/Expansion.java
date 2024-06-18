@@ -14,7 +14,7 @@ public class Expansion {
     private Long id;
     @NotNull
     @ManyToOne
-    private Game originalGame;
+    private Game baseGame;
     @NotNull
     private String title;
     private String description;
