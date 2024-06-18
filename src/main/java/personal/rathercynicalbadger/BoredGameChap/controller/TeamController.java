@@ -2,10 +2,10 @@ package personal.rathercynicalbadger.BoredGameChap.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import personal.rathercynicalbadger.BoredGameChap.repository.MeetingRepository;
+import personal.rathercynicalbadger.BoredGameChap.repository.TeamRepository;
 
 @Controller
 @AllArgsConstructor
-public class MeetingController {
-    private final MeetingRepository meetingRepo;
+public class TeamController {
+    private final TeamRepository teamRepo;
 }

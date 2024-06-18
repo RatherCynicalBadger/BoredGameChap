@@ -13,4 +13,14 @@ public class HomepageController {
     public String homepage() {
         return "/always-accessible/homepage";
     }
+
+    @GetMapping("/signup")
+    public String signup() {
+        return "/always-accessible/signup";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "/always-accessible/about";
+    }
 }
