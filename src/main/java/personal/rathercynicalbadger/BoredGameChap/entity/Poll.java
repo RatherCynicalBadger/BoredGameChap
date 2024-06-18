@@ -19,5 +19,10 @@ public class Poll {
     @OneToOne
     private User creator;
     @ManyToMany
+    @JoinTable(
+            name = "poll_game",
+            joinColumns = @JoinColumn(name = "poll_id"),
+            inverseJoinColumns = @JoinColumn(name = "game_id")
+    )
     private List<Game> suggestedGames = new ArrayList<>();
 }

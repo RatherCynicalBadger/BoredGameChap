@@ -20,11 +20,16 @@ public class User {
     private String password;
     @ManyToMany
     @JoinTable(
-            name = "user_owned_games",
+            name = "user_game",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "owned_games_id")
+            inverseJoinColumns = @JoinColumn(name = "game_id")
     )
     private List<Game> ownedGames;
     @ManyToMany
+    @JoinTable(
+            name = "user_team",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
     private List<Team> teams;
 }
