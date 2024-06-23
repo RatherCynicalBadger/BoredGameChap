@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header th:fragment="header" class="app-header">
+    <div class="app-header-logo">
+        <div class="logo">
+				<span class="logo-icon">
+					<img src="" alt="LOGO"/>
+				</span>
+            <h1 class="logo-title">
+                <span>BoardGameChap</span>
+                <span>PLACEHOLDER</span>
+            </h1>
+        </div>
+    </div>
+    <div class="app-header-navigation">
+        <div class="tabs">
+            <a href="#">
+                Overview
+            </a>
+            <a href="#" class="active">
+                Meetings
+            </a>
+            <a href="#">
+                Groups
+            </a>
+            <a href="#">
+                Games
+            </a>
+        </div>
+    </div>
+    <div class="app-header-actions">
+        <button class="user-profile">
+            <span>USERNAME</span>
+            <span>
+					<img src="" alt="profile pic goes here"/>
+				</span>
+        </button>
+    </div>
+</header>
+</body>
+</html>

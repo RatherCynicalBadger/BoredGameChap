@@ -27,11 +27,6 @@ public class Game {
      * Average play time in minutes.
      */
     private int playtime;
-    @ManyToMany
-    @JoinTable(
-            name = "user_game",
-            joinColumns = @JoinColumn(name = "game_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
+    @ManyToMany(mappedBy = "ownedGames",fetch = FetchType.LAZY)
     private List<User> owners;
 }
