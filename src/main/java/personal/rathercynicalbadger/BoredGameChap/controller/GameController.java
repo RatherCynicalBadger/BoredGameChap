@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import personal.rathercynicalbadger.BoredGameChap.entity.Game;
 import personal.rathercynicalbadger.BoredGameChap.repository.GameRepository;
 
-@Controller("/app/user")
+@Controller
 @AllArgsConstructor
 public class GameController {
     private final GameRepository gameRepo;
@@ -18,7 +18,7 @@ public class GameController {
     @GetMapping("/addGame")
     public String addGame(Model model) {
         model.addAttribute("newGame", new Game());
-        return "/app/user/add-game";
+        return "user/add-game";
     }
 
     @PostMapping("/addGame")
@@ -31,6 +31,6 @@ public class GameController {
     public String ownedGames(Model model, @PathVariable long userId) {
         //TODO
         //model.addAttribute("ownedGames", );
-        return "/app/user/owned-games";
+        return "user/owned-games";
     }
 }

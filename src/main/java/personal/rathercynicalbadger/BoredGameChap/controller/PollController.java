@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import personal.rathercynicalbadger.BoredGameChap.entity.Poll;
 import personal.rathercynicalbadger.BoredGameChap.repository.PollRepository;
 
-@Controller("/app/group/poll")
+@Controller
 @AllArgsConstructor
 public class PollController {
     private final PollRepository pollRepo;
@@ -17,7 +17,7 @@ public class PollController {
     @GetMapping("/create")
     public String createPoll(Model model) {
         model.addAttribute("newPoll", new Poll());
-        return "/app/group/meeting/poll/create-poll";
+        return "group/meeting/poll/create-poll";
     }
 
     @PostMapping("/create")
