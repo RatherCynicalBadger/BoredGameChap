@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Adding new game</title>
+</head>
+<body>
+<form th:action="@{~/bgc/game/search}" method="post">
+    <input type="text" name="title" placeholder="Title"><br>
+    <button type="submit">SEARCH</button>
+</form>
+<a th:href="@{~/bgc/game/add_by_hand}">ADD GAME MANUALLY</a>
+</body>
+</html>

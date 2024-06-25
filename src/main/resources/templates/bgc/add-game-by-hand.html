@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add game manually</title>
+</head>
+<body>
+<form th:object="${gameToAdd}" th:action="@{~/bgc/game/add_by_hand}" method="post">
+    <label>
+        <input type="text" th:field="*{title}" placeholder="Title"/>
+    </label>
+    <label>
+        <input type="text" th:field="*{description}" placeholder="Description"/>
+    </label>
+    <label>
+        <input type="number" th:field="*{minPlayers}" min="1" max="127" step="1"/>
+    </label>
+    <label>
+        <input type="number" th:field="*{maxPlayers}" min="1" max="127" step="1"/>
+    </label>
+    <label>
+        <input type="number" th:field="*{playtime}" min="1">
+    </label>
+    <label>
+        <input type="date" th:field="*{released}">
+    </label>
+    <button type="submit">Add to your collection</button>
+</form>
+</body>
+</html>
