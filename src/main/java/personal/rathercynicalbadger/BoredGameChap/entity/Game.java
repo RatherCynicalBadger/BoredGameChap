@@ -1,5 +1,6 @@
 package personal.rathercynicalbadger.BoredGameChap.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -29,5 +30,6 @@ public class Game {
      */
     private int playtime;
     @ManyToMany(mappedBy = "ownedGames", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<User> owners;
 }
