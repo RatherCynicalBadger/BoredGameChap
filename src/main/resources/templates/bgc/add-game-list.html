@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search results</title>
+</head>
+<body>
+<th:block th:each="game:${results}">
+    <form th:action="@{~/bgc/game/add_to_collection}" method="get">
+        <ul>
+            <li th:text="${game.title}"/>
+            <li th:text="${game.description}"/>
+            <li th:text="${game.minPlayers}"/>
+            <li th:text="${game.maxPlayers}"/>
+            <li th:text="${game.playtime}"/>
+            <li th:text="${game.released}"/>
+        </ul>
+        <input type="hidden" name="gameId" th:value="${game.id}">
+        <input type="hidden" name="userId" th:value="1">
+        <button type="submit">THAT'S THE ONE!</button>
+    </form>
+</th:block>
+</body>
+</html>

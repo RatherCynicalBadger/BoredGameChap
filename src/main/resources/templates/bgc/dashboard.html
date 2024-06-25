@@ -81,25 +81,14 @@
                 </div>
             </div>
             <div class="games">
-                <th:block th:each="game:${ownedGames}">
+                <th:block th:each="gameTitle:${ownedGamesSimple}">
                     <div class="game">
                         <div class="game-logo">
                             <img src="" alt="game thumbnail goes here"/>
                         </div>
-                        <dl class="game-details">
-                            <div>
-                                <dt th:text="${game.title}"/>
-                                <dd th:text="${game.description}"/>
-                            </div>
-                            <div>
-                                <dt>Number of players</dt>
-                                <dd th:text="#{number.of.players(${game.minPlayers}, ${game.maxPlayers})}"></dd>
-                            </div>
-                            <div>
-                                <dt>Playtime</dt>
-                                <dd th:text="${game.playtime}"></dd>
-                            </div>
-                        </dl>
+                        <div class="game-details">
+                            <p th:text="${gameTitle}"/>
+                        </div>
                         <div class="game-number">
                             PLACEHOLDER
                         </div>
