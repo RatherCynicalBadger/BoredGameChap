@@ -18,7 +18,7 @@
 //        http.authorizeHttpRequests(auth -> auth
 //                        .requestMatchers("/", "/always-accessible/**", "/signup", "/about").permitAll()
 //                        .requestMatchers(antMatcher("/app/**")).hasRole("USER")
-//                        .requestMatchers(antMatcher("/group/admin/**")).hasRole("GROUPADMIN")
+//                        .requestMatchers(antMatcher("/team/admin/**")).hasRole("GROUPADMIN")
 //                        .requestMatchers(antMatcher("/admin-panel/**")).hasRole("SUPERADMIN")
 ////                        .anyRequest().authenticated()
 //                ).formLogin(Customizer.withDefaults());

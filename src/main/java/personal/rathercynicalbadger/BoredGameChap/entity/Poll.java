@@ -1,5 +1,6 @@
 package personal.rathercynicalbadger.BoredGameChap.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,6 @@ public class Poll {
             joinColumns = @JoinColumn(name = "poll_id"),
             inverseJoinColumns = @JoinColumn(name = "game_id")
     )
+    @JsonIgnore
     private List<Game> suggestedGames = new ArrayList<>();
 }

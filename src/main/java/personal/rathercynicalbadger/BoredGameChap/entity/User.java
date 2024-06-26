@@ -1,5 +1,6 @@
 package personal.rathercynicalbadger.BoredGameChap.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -24,6 +25,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "game_id")
     )
+    @JsonIgnore
     private List<Game> ownedGames;
     @ManyToMany
     @JoinTable(
@@ -31,5 +33,6 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "team_id")
     )
+    @JsonIgnore
     private List<Team> teams;
 }
