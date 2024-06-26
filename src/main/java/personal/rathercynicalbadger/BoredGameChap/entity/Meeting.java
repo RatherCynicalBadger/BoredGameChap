@@ -22,6 +22,8 @@ public class Meeting {
      * Custom message to include with created meeting.
      */
     private String message;
+    @ManyToOne
+    private Team team;
     @OneToOne
     Poll poll;
 }

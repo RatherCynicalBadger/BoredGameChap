@@ -18,11 +18,11 @@ public class TeamController {
     private final TeamRepository teamRepo;
     private final UserRepository userRepo;
     private final MeetingRepository meetingRepo;
-    private final PollRepository pollRepo;
 
     @GetMapping("/bgc/team/{teamId}")
     public String teamDashboard(@PathVariable Long teamId, Model model) {
         model.addAttribute("teamId", teamId);
+        model.addAttribute("meetings", meetingRepo.findAllByTeam(teamId));
         return "/bgc/team/team-dashboard";
     }
 
