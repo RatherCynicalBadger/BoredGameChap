@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import personal.rathercynicalbadger.BoredGameChap.entity.Game;
 import personal.rathercynicalbadger.BoredGameChap.entity.User;
 import personal.rathercynicalbadger.BoredGameChap.repository.GameRepository;
+import personal.rathercynicalbadger.BoredGameChap.repository.InviteRepository;
 import personal.rathercynicalbadger.BoredGameChap.repository.UserRepository;
 
 //TODO replace temporary IDs with actual IDs once Spring Security is on
@@ -17,11 +18,13 @@ import personal.rathercynicalbadger.BoredGameChap.repository.UserRepository;
 public class UserController {
     private final UserRepository userRepo;
     private final GameRepository gameRepo;
+    private final InviteRepository inviteRepo;
     private final long TEST_USER_ID = 1L;
 
     @GetMapping("/bgc")
     public String showUserDashboard(Model model) {
         model.addAttribute("ownedGamesSimple", gameRepo.findAllGamesSimpleByOwnerId(TEST_USER_ID));
+        model.addAttribute("invites", inviteRepo.findAllByInvitedId(TEST_USER_ID));
         return "/bgc/dashboard";
     }
 

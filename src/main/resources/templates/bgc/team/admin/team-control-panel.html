@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Group control panel</title>
+    <title>Team control panel</title>
 </head>
 <body>
-
+<div>
+    <h5>Invite new member</h5>
+    <form th:action="@{~/bgc/team/invite}" method="post">
+        <input type="text" name="username" placeholder="Enter username here">
+        <input type="hidden" name="teamId" th:value="1">
+        <button type="submit">SEND INVITE</button>
+    </form>
+</div>
+<div>
+    <h5>Edit team data</h5>
+<!--    TODO update, delete goes here-->
+</div>
 </body>
 </html>
