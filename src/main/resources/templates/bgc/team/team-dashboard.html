@@ -9,7 +9,32 @@
     <p>Info goes here</p>
 </div>
 <div>
-    <p>Meetings go here</p>
+    <section class="meeting-section">
+        <h2>Meetings</h2>
+        <div class="meeting-section-header">
+            Meetings
+        </div>
+        <div class="tiles" th:each="meeting:${meetings}">
+            <article class="tile">
+                <div class="tile-header">
+                    <i class="ph-fire-simple-light"></i>
+                    <h3>
+                        <span th:text="${meeting.time}"/>
+                        <span th:text="${meeting.location}"/>
+                        <span th:text="${meeting.message}"/>
+                    </h3>
+                </div>
+                <th:block th:if="${meeting.poll} != null">
+                    <a href="#">
+                        <span>Vote in poll</span>
+                        <span class="icon-button">
+								<i class="ph-caret-right-bold"></i>
+							</span>
+                    </a>
+                </th:block>
+            </article>
+        </div>
+    </section>
 </div>
 </body>
 </html>

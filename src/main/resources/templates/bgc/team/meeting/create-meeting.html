@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create meeting</title>
+</head>
+<body>
+<form th:object="${meeting}" th:action="@{~/bgc/team/{teamId}/meeting/create(teamId=${teamId})}" method="post">
+    <input type="datetime-local" th:field="*{time}">
+    <input type="text" th:field="*{location}" placeholder="Where">
+    <input type="text" th:field="*{message}" placeholder="Message">
+    <button type="submit">CREATE</button>
+</form>
+</body>
+</html>
