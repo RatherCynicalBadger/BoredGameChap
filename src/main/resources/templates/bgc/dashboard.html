@@ -97,65 +97,33 @@
             </div>
         </section>
     </div>
-    <div class="app-body-expansionbar">
-        <section class="expansion-section">
-            <h2>Right sidebar</h2>
-            <div class="expansions">
-                <div class="expansion">
+    <div class="app-body-invitebar">
+        <section class="invite-section">
+            <h2>Invites sidebar</h2>
+            <div class="invites" th:each="invite:${invites}">
+                <div class="invite">
                     <div class="card green">
-                        <span>12345</span>
-                        <span>PLACEHOLDER</span>
+                        <span>You've been invited to:</span>
+                        <span th:text="${invite.teamName}"/>
                     </div>
-                    <div class="expansion-details">
-                        <h3>PLACEHOLDER</h3>
-                        <div>
-                            <span>PLACEHOLDER</span>
-                            <button class="icon-button">
-                                <i class="ph-caret-right-bold"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="expansion">
-                    <div class="card olive">
-                        <span>12345</span>
-                        <span>PLACEHOLDER</span>
-                    </div>
-                    <div class="expansion-details">
-                        <h3>PLACEHOLDER</h3>
-                        <div>
-                            <span>12345</span>
-                            <button class="icon-button">
-                                <i class="ph-caret-right-bold"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="expansion">
-                    <div class="card gray">
-                        <span>12345</span>
-                        <span>12345</span>
-                    </div>
-                    <div class="expansion-details">
-                        <h3>PLACEHOLDER</h3>
-                        <div>
-                            <span>PLACEHOLDER</span>
-                            <button class="icon-button">
-                                <i class="ph-caret-right-bold"></i>
-                            </button>
-                        </div>
+                    <div class="invite-details">
+                        <form action="" method="post">
+                            <input type="hidden" name="inviteId" th:value="${invite.id}">
+                            <button type="submit" th:formaction="@{~/bgc/invite/accept}">ACCEPT</button>
+                            <button type="submit" th:formaction="@{~/bgc/invite/reject}">REJECT</button>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="expansion-section-footer">
-                <button class="save-button">
-                    Save
-                </button>
-                <button class="settings-button">
-                    <i class="ph-gear"></i>
-                    <span>More settings</span>
-                </button>
-            </div>
+<!--            <div class="invite-section-footer">-->
+<!--                <button class="save-button">-->
+<!--                    Save-->
+<!--                </button>-->
+<!--                <button class="settings-button">-->
+<!--                    <i class="ph-gear"></i>-->
+<!--                    <span>More settings</span>-->
+<!--                </button>-->
+<!--            </div>-->
         </section>
     </div>
 </div>

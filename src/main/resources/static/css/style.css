@@ -503,17 +503,17 @@ a {
   font-size: 1.5rem;
 }
 
-.expansions {
+.invites {
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;
 }
 
-.expansion {
+.invite {
   display: flex;
   align-items: center;
 }
-.expansion + * {
+.invite + * {
   margin-top: 1rem;
 }
 
@@ -543,17 +543,17 @@ a {
   align-self: flex-end;
 }
 
-.expansion-details {
+.invite-details {
   display: flex;
   width: 100%;
   flex-direction: column;
   margin-left: 1.5rem;
 }
-.expansion-details h3 {
+.invite-details h3 {
   font-size: 1rem;
   color: var(--c-text-tertiary);
 }
-.expansion-details div {
+.invite-details div {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -564,7 +564,7 @@ a {
   justify-content: space-between;
   flex: 1;
 }
-.expansion-details div span {
+.invite-details div span {
   font-size: 1.5rem;
 }
 
@@ -678,26 +678,26 @@ a {
   }
 }
 
-.expansion-section > h2 {
+.invite-section > h2 {
   font-size: 1.5rem;
 }
 
-.expansion-section-header {
+.invite-section-header {
   display: flex;
   align-items: center;
   margin-top: 1rem;
 }
-.expansion-section-header p {
+.invite-section-header p {
   color: var(--c-text-tertiary);
   font-size: 0.875rem;
 }
-.expansion-section-header div {
+.invite-section-header div {
   padding-left: 1rem;
   margin-left: auto;
   display: flex;
   align-items: center;
 }
-.expansion-section-header div > * + * {
+.invite-section-header div > * + * {
   margin-left: 0.5rem;
 }
 
@@ -755,7 +755,7 @@ a {
   width: 100%;
 }
 
-.expansion-section-footer {
+.invite-section-footer {
   display: flex;
   align-items: center;
   margin-top: 1.5rem;

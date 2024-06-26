@@ -21,7 +21,8 @@ public class TeamController {
     private final PollRepository pollRepo;
 
     @GetMapping("/bgc/team/{teamId}")
-    public String teamDashboard(@PathVariable Long teamId) {
+    public String teamDashboard(@PathVariable Long teamId, Model model) {
+        model.addAttribute("teamId", teamId);
         return "/bgc/team/team-dashboard";
     }
 
@@ -40,5 +41,12 @@ public class TeamController {
         teamToCreate.getMembers().add(user);
         teamToCreate = teamRepo.save(teamToCreate);
         return "redirect:/bgc/team/" + teamToCreate.getId();
+    }
+
+    //TODO secure access
+    @GetMapping("/bgc/team/{teamId}/admin")
+    public String teamAdminPanel(@PathVariable Long teamId, Model model) {
+        model.addAttribute("teamId", teamId);
+        return "/bgc/team/admin/team-control-panel";
     }
 }
