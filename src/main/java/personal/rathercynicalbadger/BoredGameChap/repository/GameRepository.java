@@ -15,5 +15,5 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> findAllGamesByOwnerId(@Param("userId") Long userId);
 
     @Query("SELECT g.title FROM Game g JOIN g.owners o WHERE o.id = :userId")
-    List<String> findAllGamesSimpleByOwnerId(@Param("userId") Long userId);
+    List<String> findAllGamesNamesByOwnerId(@Param("userId") Long userId);
 }

@@ -24,14 +24,15 @@
                         <span th:text="${meeting.message}"/>
                     </h3>
                 </div>
-                <th:block th:if="${meeting.poll} != null">
-                    <a href="#">
-                        <span>Vote in poll</span>
-                        <span class="icon-button">
-								<i class="ph-caret-right-bold"></i>
-							</span>
-                    </a>
-                </th:block>
+<!--                TODO Use /bgc/poll/{pollId} to fetch data using JS-->
+<!--                <th:block th:if="${meeting.poll} != null">-->
+<!--                    <a href="#">-->
+<!--                        <span>Vote in poll</span>-->
+<!--                        <span class="icon-button">-->
+<!--								<i class="ph-caret-right-bold"></i>-->
+<!--							</span>-->
+<!--                    </a>-->
+<!--                </th:block>-->
             </article>
         </div>
     </section>
