@@ -1,7 +1,7 @@
 package personal.rathercynicalbadger.BoredGameChap.controller;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import personal.rathercynicalbadger.BoredGameChap.entity.Meeting;
 import personal.rathercynicalbadger.BoredGameChap.entity.Team;
-import personal.rathercynicalbadger.BoredGameChap.repository.MeetingRepository;
-import personal.rathercynicalbadger.BoredGameChap.repository.TeamRepository;
+import personal.rathercynicalbadger.BoredGameChap.service.MeetingService;
+import personal.rathercynicalbadger.BoredGameChap.service.TeamService;
 
 @Controller
+@Secured("ROLE_USER")
 @AllArgsConstructor
 public class MeetingController {
-    private final MeetingRepository meetingRepo;
-    private final TeamRepository teamRepo;
+    private final MeetingService meetingService;
+    private final TeamService teamService;
 
     @GetMapping("/bgc/team/{teamId}/meeting/create")
     public String createMeetingForm(Model model, @PathVariable Long teamId) {
@@ -28,11 +29,9 @@ public class MeetingController {
 
     @PostMapping("/bgc/team/{teamId}/meeting/create")
     public String createMeetingAction(@ModelAttribute Meeting meeting, @PathVariable Long teamId) {
-        Team team = teamRepo.findById(teamId).orElseThrow(
-                () -> new EntityNotFoundException("No team with given id.")
-        );
+        Team team = teamService.findById(teamId);
         meeting.setTeam(team);
-        meetingRepo.save(meeting);
+        meetingService.save(meeting);
         return "redirect:/bgc/team/" + teamId;
     }
 
