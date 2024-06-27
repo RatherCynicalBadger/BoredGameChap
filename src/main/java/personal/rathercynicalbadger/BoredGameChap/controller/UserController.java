@@ -1,46 +1,56 @@
 package personal.rathercynicalbadger.BoredGameChap.controller;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import personal.rathercynicalbadger.BoredGameChap.entity.Game;
 import personal.rathercynicalbadger.BoredGameChap.entity.User;
-import personal.rathercynicalbadger.BoredGameChap.repository.GameRepository;
-import personal.rathercynicalbadger.BoredGameChap.repository.InviteRepository;
-import personal.rathercynicalbadger.BoredGameChap.repository.UserRepository;
+import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
+import personal.rathercynicalbadger.BoredGameChap.service.GameService;
+import personal.rathercynicalbadger.BoredGameChap.service.InviteService;
+import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 
-//TODO replace temporary IDs with actual IDs once Spring Security is on
 @Controller
 @AllArgsConstructor
 public class UserController {
-    private final UserRepository userRepo;
-    private final GameRepository gameRepo;
-    private final InviteRepository inviteRepo;
-    private final long TEST_USER_ID = 1L;
+    private final UserService userService;
+    private final GameService gameService;
+    private final InviteService inviteService;
 
+    @PostMapping("/register")
+    public void saveUser(@ModelAttribute User user) {
+        userService.save(user);
+    }
+
+    @Secured("ROLE_USER")
     @GetMapping("/bgc")
-    public String showUserDashboard(Model model) {
-        model.addAttribute("ownedGamesSimple", gameRepo.findAllGamesNamesByOwnerId(TEST_USER_ID));
-        model.addAttribute("invites", inviteRepo.findAllByInvitedId(TEST_USER_ID));
+    public String showUserDashboard(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+        model.addAttribute("ownedGames", gameService.findAllOwnedByUser(currentUser.getUser()));
+        model.addAttribute("invites", inviteService.findAllByInvitedId(currentUser.getUser().getId()));
         return "/bgc/dashboard";
     }
 
+    @Secured("ROLE_USER")
     @GetMapping("/bgc/game/owned")
-    public String listOwnedGames(Model model) {
-        model.addAttribute("owned", gameRepo.findAllGamesByOwnerId(TEST_USER_ID));
+    public String listOwnedGames(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+        model.addAttribute("owned", gameService.findAllOwnedByUser(currentUser.getUser()));
         return "/bgc/owned-games";
     }
 
+    @Secured("ROLE_USER")
     //TODO fix Hibernate weirding out with update queries
     @GetMapping("/bgc/game/add_to_collection")
-    public String addToUserCollection(@RequestParam Long gameId, @RequestParam Long userId) {
-        User user = userRepo.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found."));
-        Game game = gameRepo.findById(gameId).orElseThrow(() -> new EntityNotFoundException("Game not found."));
+    public String addToUserCollection(@RequestParam Long gameId, @AuthenticationPrincipal CurrentUser currentUser) {
+        User user = currentUser.getUser();
+        Game game = gameService.findById(gameId);
         user.getOwnedGames().add(game);
-        userRepo.save(user);
+        userService.save(user);
         return "redirect:/bgc/game/owned";
     }
 }

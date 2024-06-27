@@ -1,6 +1,8 @@
 package personal.rathercynicalbadger.BoredGameChap.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,18 +10,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import personal.rathercynicalbadger.BoredGameChap.entity.Poll;
-import personal.rathercynicalbadger.BoredGameChap.repository.MeetingRepository;
-import personal.rathercynicalbadger.BoredGameChap.repository.PollRepository;
-import personal.rathercynicalbadger.BoredGameChap.repository.UserRepository;
+import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
+import personal.rathercynicalbadger.BoredGameChap.service.MeetingService;
+import personal.rathercynicalbadger.BoredGameChap.service.PollService;
+import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 
 @Controller
+@Secured("ROLE_USER")
 @AllArgsConstructor
 public class PollController {
-    private final PollRepository pollRepo;
-    private final UserRepository userRepo;
-    private final MeetingRepository meetingRepo;
-
-    private final Long TEMP_USER_ID = 1L;
+    private final PollService pollService;
+    private final UserService userService;
+    private final MeetingService meetingService;
 
     @GetMapping("/bgc/team/{teamId}/meeting/{meetingId}/poll")
     public String createPoll(Model model, @PathVariable Long teamId, @PathVariable Long meetingId) {
@@ -30,10 +32,13 @@ public class PollController {
     }
 
     @PostMapping("/bgc/team/{teamId}/meeting/{meetingId}/poll")
-    public String savePoll(@ModelAttribute Poll newPoll, @PathVariable Long teamId, @PathVariable Long meetingId) {
-        newPoll.setMeeting(meetingRepo.getReferenceById(meetingId));
-        newPoll.setCreator(userRepo.getReferenceById(TEMP_USER_ID));
-        pollRepo.save(newPoll);
+    public String savePoll(@ModelAttribute Poll newPoll,
+                           @PathVariable Long teamId,
+                           @PathVariable Long meetingId,
+                           @AuthenticationPrincipal CurrentUser currentUser) {
+        newPoll.setMeeting(meetingService.findById(meetingId));
+        newPoll.setCreator(userService.findById(currentUser.getUser().getId()));
+        pollService.save(newPoll);
         return "redirect:/bgc/team/" + teamId;
     }
 
@@ -44,14 +49,14 @@ public class PollController {
      */
     @GetMapping("/bgc/get-poll/{pollId}")
     public Poll pollDetails(@PathVariable Long pollId) {
-        return pollRepo.findById(pollId).orElseThrow();
+        return pollService.findById(pollId);
     }
 
     public void deletePoll(long pollId) {
-        pollRepo.deleteById(pollId);
+        pollService.deleteById(pollId);
     }
 
     public void updatePoll(Poll poll) {
-        pollRepo.save(poll);
+        pollService.save(poll);
     }
 }

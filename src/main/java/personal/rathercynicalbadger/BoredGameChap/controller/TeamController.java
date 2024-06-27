@@ -1,27 +1,28 @@
 package personal.rathercynicalbadger.BoredGameChap.controller;
 
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import personal.rathercynicalbadger.BoredGameChap.entity.Team;
 import personal.rathercynicalbadger.BoredGameChap.entity.User;
-import personal.rathercynicalbadger.BoredGameChap.repository.MeetingRepository;
-import personal.rathercynicalbadger.BoredGameChap.repository.TeamRepository;
-import personal.rathercynicalbadger.BoredGameChap.repository.UserRepository;
+import personal.rathercynicalbadger.BoredGameChap.service.MeetingService;
+import personal.rathercynicalbadger.BoredGameChap.service.TeamService;
+import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 
 @Controller
+@Secured("ROLE_USER")
 @AllArgsConstructor
 public class TeamController {
-    private final TeamRepository teamRepo;
-    private final UserRepository userRepo;
-    private final MeetingRepository meetingRepo;
+    private final TeamService teamService;
+    private final UserService userService;
+    private final MeetingService meetingService;
 
     @GetMapping("/bgc/team/{teamId}")
     public String teamDashboard(@PathVariable Long teamId, Model model) {
         model.addAttribute("teamId", teamId);
-        model.addAttribute("meetings", meetingRepo.findAllByTeam(teamId));
+        model.addAttribute("meetings", meetingService.findAllByTeamId(teamId));
         return "/bgc/team/team-dashboard";
     }
 
@@ -35,14 +36,14 @@ public class TeamController {
     public String createTeamAction(@ModelAttribute Team teamToCreate,
                                    @RequestParam Long teamAdminId) {
         teamToCreate.setTeamAdminId(teamAdminId);
-        User user = userRepo.findById(teamAdminId)
-                .orElseThrow(() -> new EntityNotFoundException("User that created group not in DB?"));
+        User user = userService.findById(teamAdminId);
         teamToCreate.getMembers().add(user);
-        teamToCreate = teamRepo.save(teamToCreate);
+        teamService.save(teamToCreate);
+        teamToCreate = teamService.findByName(teamToCreate.getName());
         return "redirect:/bgc/team/" + teamToCreate.getId();
     }
 
-    //TODO secure access
+    @Secured("ROLE_TEAM_ADMIN")
     @GetMapping("/bgc/team/{teamId}/admin")
     public String teamAdminPanel(@PathVariable Long teamId, Model model) {
         model.addAttribute("teamId", teamId);
