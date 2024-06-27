@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create poll</title>
 </head>
 <body>
-
+<form th:object="${newPoll}" th:action="@{~/bgc/team/{teamId}/meeting/{meetingId}/poll(teamId=${teamId}, meetingId=${meetingId})}" method="post">
+    <input type="text" th:field="*{name1}">
+    <input type="text" th:field="*{name2}">
+    <input type="text" th:field="*{name3}">
+    <input type="text" th:field="*{name4}">
+    <button type="submit">CREATE POLL</button>
+</form>
 </body>
 </html>

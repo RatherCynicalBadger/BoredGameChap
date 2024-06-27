@@ -23,7 +23,7 @@ public class UserController {
 
     @GetMapping("/bgc")
     public String showUserDashboard(Model model) {
-        model.addAttribute("ownedGamesSimple", gameRepo.findAllGamesSimpleByOwnerId(TEST_USER_ID));
+        model.addAttribute("ownedGamesSimple", gameRepo.findAllGamesNamesByOwnerId(TEST_USER_ID));
         model.addAttribute("invites", inviteRepo.findAllByInvitedId(TEST_USER_ID));
         return "/bgc/dashboard";
     }

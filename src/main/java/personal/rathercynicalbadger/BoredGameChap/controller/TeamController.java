@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import personal.rathercynicalbadger.BoredGameChap.entity.Team;
 import personal.rathercynicalbadger.BoredGameChap.entity.User;
 import personal.rathercynicalbadger.BoredGameChap.repository.MeetingRepository;
-import personal.rathercynicalbadger.BoredGameChap.repository.PollRepository;
 import personal.rathercynicalbadger.BoredGameChap.repository.TeamRepository;
 import personal.rathercynicalbadger.BoredGameChap.repository.UserRepository;
 
