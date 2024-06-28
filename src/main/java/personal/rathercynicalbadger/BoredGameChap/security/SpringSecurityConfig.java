@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,16 +24,21 @@ public class SpringSecurityConfig {
         http
                 .authenticationManager(authenticationManager)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/resources/**").permitAll()
+                        .requestMatchers("/home/**", "/templates/**").permitAll()
 //                        .requestMatchers("/bgc/**").hasAuthority("USER")
 //                        .requestMatchers("/bgc/team/*/admin/**").hasAuthority("GROUP_ADMIN")
-                        .anyRequest().authenticated()
+//                        .anyRequest().authenticated()
                 ).formLogin(l -> l
                         .defaultSuccessUrl("/bgc"))
                 .logout(LogoutConfigurer::permitAll)
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .exceptionHandling(eh -> eh.accessDeniedPage("/403"));
         return http.build();
+    }
+
+    @Bean
+    WebSecurityCustomizer configureWebSecurity() {
+        return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/css/**", "/webjars/**");
     }
 
     @Bean

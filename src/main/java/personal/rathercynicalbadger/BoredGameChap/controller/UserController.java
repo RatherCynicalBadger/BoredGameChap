@@ -20,11 +20,6 @@ public class UserController {
     private final GameService gameService;
     private final InviteService inviteService;
 
-    @PostMapping("/register")
-    public void saveUser(@ModelAttribute User user) {
-        userService.save(user);
-    }
-
     @Secured("ROLE_USER")
     @GetMapping("/bgc")
     public String showUserDashboard(Model model, @AuthenticationPrincipal CurrentUser currentUser) {

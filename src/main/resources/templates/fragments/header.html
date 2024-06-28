@@ -13,7 +13,6 @@
 				</span>
             <h1 class="logo-title">
                 <span>BoardGameChap</span>
-                <span>PLACEHOLDER</span>
             </h1>
         </div>
     </div>
@@ -35,10 +34,10 @@
     </div>
     <div class="app-header-actions">
         <button class="user-profile">
-            <span>USERNAME</span>
-            <span>
-					<img src="" alt="profile pic goes here"/>
-				</span>
+            <span th:text="${#authentication.name}"/>
+<!--            <span>-->
+<!--					<img src="" alt="profile pic goes here"/>-->
+<!--				</span>-->
         </button>
     </div>
 </header>
