@@ -4,13 +4,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import personal.rathercynicalbadger.BoredGameChap.entity.Game;
 import personal.rathercynicalbadger.BoredGameChap.entity.User;
 import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
+import personal.rathercynicalbadger.BoredGameChap.service.BGGAPIService;
 import personal.rathercynicalbadger.BoredGameChap.service.GameService;
 import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 
@@ -21,24 +19,39 @@ import java.util.List;
 public class GameController {
     private final GameService gameService;
     private final UserService userService;
+    private final BGGAPIService apiService;
 
     @GetMapping("/bgc/game/add")
-    public String addGameViewForm() {
+    public String addGameForm() {
         return "/bgc/add-game-menu";
     }
 
-    @PostMapping("/bgc/game/search")
-    public String gameSearchResults(Model model, @RequestParam String title) {
-        model.addAttribute("results", gameService.findAllByTitleLike(title));
+    @PostMapping("/bgc/game/search_local")
+    public String gameLocalSearchResults(Model model, @RequestParam String title) {
+        model.addAttribute("resultsLocal", gameService.findAllByTitleLike(title));
         return "/bgc/add-game-list";
     }
 
-    @PostMapping("/bgc/add_game")
-    public void addGameAction(@ModelAttribute Game gameToAdd, @AuthenticationPrincipal CurrentUser currentUser) {
-        User user = userService.findById(currentUser.getUser().getId());
-        List<Game> testUserGames = gameService.findAllOwnedByUser(currentUser.getUser());
-        user.setOwnedGames(testUserGames);
-        userService.save(user);
+    @PostMapping("/bgc/game/search_api")
+    public String gameAPISearchResults(Model model, @RequestParam String title) {
+        model.addAttribute("resultsApi", apiService.searchByTitle(title));
+        return "/bgc/add-game-list";
+    }
+
+//    @RequestMapping("/bgc/add_game")
+//    public void addGameAction(@ModelAttribute Game gameToAdd, @AuthenticationPrincipal CurrentUser currentUser) {
+//        User user = userService.findById(currentUser.getUser().getId());
+//        List<Game> userGames = gameService.findAllOwnedByUser(currentUser.getUser());
+//        user.setOwnedGames(userGames);
+//        userService.save(user);
+//    }
+
+    @PostMapping("/bgc/game/add_to_local_db")
+    public String addGameFromAPIToDB(Model model, @RequestParam Integer bggId) {
+        Game game = apiService.fetchGame(bggId);
+        game = gameService.save(game);
+        model.addAttribute("gameToAdd", game);
+        return "forward:/bgc/game/add_to_collection";
     }
 
     @GetMapping("/bgc/game/add_by_hand")

@@ -5,20 +5,34 @@
     <title>Search results</title>
 </head>
 <body>
-<th:block th:each="game:${results}">
-    <form th:action="@{~/bgc/game/add_to_collection}" method="get">
-        <ul>
-            <li th:text="${game.title}"/>
-            <li th:text="${game.description}"/>
-            <li th:text="${game.minPlayers}"/>
-            <li th:text="${game.maxPlayers}"/>
-            <li th:text="${game.playtime}"/>
-            <li th:text="${game.released}"/>
-        </ul>
-        <input type="hidden" name="gameId" th:value="${game.id}">
-        <input type="hidden" name="userId" th:value="1">
-        <button type="submit">THAT'S THE ONE!</button>
-    </form>
+<th:block th:if="${resultsLocal != null}">
+    <div th:each="game:${resultsLocal}">
+        <form th:action="@{~/bgc/game/add_to_collection}" method="post">
+            <ul>
+                <li th:text="${game.title}"/>
+                <li th:text="${game.description}"/>
+                <li th:text="${game.minPlayers}"/>
+                <li th:text="${game.maxPlayers}"/>
+                <li th:text="${game.playtime}"/>
+                <li th:text="${game.released}"/>
+            </ul>
+            <input type="hidden" name="gameId" th:value="${game.id}">
+            <button type="submit">THAT'S THE ONE!</button>
+        </form>
+    </div>
 </th:block>
+<th:block th:if="${resultsApi != null}">
+    <div th:each="searchResult:${resultsApi}">
+        <form th:action="@{~/bgc/game/add_to_local_db}" method="post">
+            <ul>
+                <li th:text="${searchResult.key}"/>
+                <li th:text="${searchResult.value}"/>
+            </ul>
+            <input type="hidden" name="bggId" th:value="${searchResult.key}">
+            <button type="submit">THAT'S THE ONE!</button>
+        </form>
+    </div>
+</th:block>
+
 </body>
 </html>

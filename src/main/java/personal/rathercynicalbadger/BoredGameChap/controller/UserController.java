@@ -5,10 +5,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import personal.rathercynicalbadger.BoredGameChap.entity.Game;
 import personal.rathercynicalbadger.BoredGameChap.entity.User;
 import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
@@ -45,7 +42,7 @@ public class UserController {
 
     @Secured("ROLE_USER")
     //TODO fix Hibernate weirding out with update queries
-    @GetMapping("/bgc/game/add_to_collection")
+    @RequestMapping("/bgc/game/add_to_collection")
     public String addToUserCollection(@RequestParam Long gameId, @AuthenticationPrincipal CurrentUser currentUser) {
         User user = currentUser.getUser();
         Game game = gameService.findById(gameId);

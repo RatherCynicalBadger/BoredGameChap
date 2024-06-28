@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.List;
 
 @Entity
@@ -18,13 +19,14 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Column(unique = true)
+    @Column
     private String title;
+    @Column(length = 1000)
     private String description;
     @Min(1)
     private byte minPlayers;
     private byte maxPlayers;
-    private LocalDate released;
+    private Year released;
     /**
      * Average play time in minutes.
      */

@@ -21,7 +21,7 @@ public class User {
     private String username;
     private String about;
     private String password;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_game",
             joinColumns = @JoinColumn(name = "user_id"),

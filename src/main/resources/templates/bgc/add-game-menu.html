@@ -5,9 +5,10 @@
     <title>Adding new game</title>
 </head>
 <body>
-<form th:action="@{~/bgc/game/search}" method="post">
+<form th:action="@{~/bgc/game/search_local}" method="post">
     <input type="text" name="title" placeholder="Title"><br>
-    <button type="submit">SEARCH</button>
+    <button type="submit" th:formaction="@{~/bgc/game/search_local}">SEARCH LOCAL DB</button>
+    <button type="submit" th:formaction="@{~/bgc/game/search_api}">SEARCH BGG API</button>
 </form>
 <a th:href="@{~/bgc/game/add_by_hand}">ADD GAME MANUALLY</a>
 </body>
