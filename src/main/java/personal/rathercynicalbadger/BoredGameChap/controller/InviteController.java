@@ -41,6 +41,7 @@ public class InviteController {
         inviteService.deleteById(inviteId);
         return "redirect:/bgc/team/" + team.getId();
     }
+
     @PostMapping("/bgc/invite/reject")
     public String rejectInvite(@RequestParam Long inviteId) {
         inviteService.deleteById(inviteId);

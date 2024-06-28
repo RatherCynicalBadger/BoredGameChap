@@ -10,6 +10,7 @@ import personal.rathercynicalbadger.BoredGameChap.service.PollService;
 @AllArgsConstructor
 public class PollServiceImp implements PollService {
     private final PollRepository pollRepo;
+
     @Override
     public Poll save(Poll poll) {
         return pollRepo.save(poll);

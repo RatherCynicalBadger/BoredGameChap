@@ -8,6 +8,8 @@ import java.util.List;
 @Service
 public interface MeetingService {
     Meeting save(Meeting meeting);
+
     Meeting findById(Long id);
-    List<Meeting> findAllByTeamId(Long teamId);
+
+    List<Meeting> findAllByTeamIdOrderedByTime(Long teamId);
 }

@@ -21,8 +21,8 @@ public class TeamController {
 
     @GetMapping("/bgc/team/{teamId}")
     public String teamDashboard(@PathVariable Long teamId, Model model) {
-        model.addAttribute("teamId", teamId);
-        model.addAttribute("meetings", meetingService.findAllByTeamId(teamId));
+        model.addAttribute("team", teamService.findById(teamId));
+        model.addAttribute("meetings", meetingService.findAllByTeamIdOrderedByTime(teamId));
         return "/bgc/team/team-dashboard";
     }
 

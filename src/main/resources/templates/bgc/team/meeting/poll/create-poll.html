@@ -5,7 +5,9 @@
     <title>Create poll</title>
 </head>
 <body>
-<form th:object="${newPoll}" th:action="@{~/bgc/team/{teamId}/meeting/{meetingId}/poll(teamId=${teamId}, meetingId=${meetingId})}" method="post">
+<form th:object="${newPoll}"
+      th:action="@{~/bgc/team/{teamId}/meeting/{meetingId}/poll(teamId=${teamId}, meetingId=${meetingId})}"
+      method="post">
     <input type="text" th:field="*{name1}">
     <input type="text" th:field="*{name2}">
     <input type="text" th:field="*{name3}">

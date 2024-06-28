@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class InviteServiceImp implements InviteService {
     private final InviteRepository inviteRepo;
+
     @Override
     public void save(Invite invite) {
         inviteRepo.save(invite);

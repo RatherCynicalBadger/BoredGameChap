@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Meeting details</title>
+</head>
+<body>
+<div>
+    <div>
+        <span th:text="${meeting.time}"/>
+        <span th:text="${meeting.location}"/>
+        <span th:text="${meeting.message}"/>
+    </div>
+    <div th:if="${poll != null}">
+        <form th:object="${poll}" th:action="@{~/bgc/poll/{pollId}/vote(pollId=${poll.id})}" method="post">
+            <ul>
+                <li>
+                    <span th:text="${poll.name1}"/>
+                    <span th:text="${poll.score1}"/>
+                    <span><button type="submit" name="g" value="g1">VOTE</button></span>
+                </li>
+                <li>
+                    <span th:text="${poll.name2}"/>
+                    <span th:text="${poll.score2}"/>
+                    <span><button type="submit" name="g" value="g2">VOTE</button></span>
+                </li>
+                <li>
+                    <span th:text="${poll.name3}"/>
+                    <span th:text="${poll.score3}"/>
+                    <span><button type="submit" name="g" value="g3">VOTE</button></span>
+                </li>
+                <li>
+                    <span th:text="${poll.name4}"/>
+                    <span th:text="${poll.score4}"/>
+                    <span><button type="submit" name="g" value="g4">VOTE</button></span>
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+</body>
+</html>

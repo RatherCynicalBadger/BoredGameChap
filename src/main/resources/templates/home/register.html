@@ -7,31 +7,31 @@
 </head>
 <body>
 <section class="register">
-        <h1>Register</h1>
-        <form th:object="${user}" th:action="@{~/home/register}" method="post">
-            <div class="nice-form-group">
-                <label>Username</label>
-                <input type="text" placeholder="Your name" th:field="*{username}">
-            </div>
+    <h1>Register</h1>
+    <form th:object="${user}" th:action="@{~/home/register}" method="post">
+        <div class="nice-form-group">
+            <label>Username</label>
+            <input type="text" placeholder="Your name" th:field="*{username}">
+        </div>
 
-            <div class="nice-form-group">
-                <label>About</label>
-                <input type="text" placeholder="Write something about yourself" th:field="*{about}">
-            </div>
+        <div class="nice-form-group">
+            <label>About</label>
+            <input type="text" placeholder="Write something about yourself" th:field="*{about}">
+        </div>
 
-            <div class="nice-form-group">
-                <label>Password</label>
-                <input type="password" placeholder="Enter password" th:field="*{password}">
-            </div>
+        <div class="nice-form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Enter password" th:field="*{password}">
+        </div>
 
-            <div class="nice-form-group">
-                <label>Password</label>
-                <input type="password" placeholder="Repeat password" name="pswCheck">
-            </div>
-            <div>
-                <button type="submit">REGISTER</button>
-            </div>
-        </form>
+        <div class="nice-form-group">
+            <label>Password</label>
+            <input type="password" placeholder="Repeat password" name="pswCheck">
+        </div>
+        <div>
+            <button type="submit">REGISTER</button>
+        </div>
+    </form>
 </section>
 </body>
 </html>

@@ -1,18 +1,16 @@
 package personal.rathercynicalbadger.BoredGameChap.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import personal.rathercynicalbadger.BoredGameChap.entity.Game;
-import personal.rathercynicalbadger.BoredGameChap.entity.User;
-import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
 import personal.rathercynicalbadger.BoredGameChap.service.BGGAPIService;
 import personal.rathercynicalbadger.BoredGameChap.service.GameService;
 import personal.rathercynicalbadger.BoredGameChap.service.UserService;
-
-import java.util.List;
 
 @Controller
 @AllArgsConstructor

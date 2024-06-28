@@ -35,5 +35,13 @@ public class MeetingController {
         return "redirect:/bgc/team/" + teamId;
     }
 
-
+    @GetMapping("/bgc/team/{teamId}/meeting/{meetingId}/details")
+    public String showMeetingDetails(@PathVariable Long teamId, @PathVariable Long meetingId, Model model) {
+        Meeting m = meetingService.findById(meetingId);
+        model.addAttribute("meeting", m);
+        if (m.getPoll() != null) {
+            model.addAttribute("poll", m.getPoll());
+        }
+        return "/bgc/team/" + teamId + "meeting/" + meetingId + "/details";
+    }
 }

@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface MeetingRepository extends JpaRepository<Meeting, Long> {
 
-    @Query("SELECT m FROM Meeting m WHERE m.team.id = :teamId")
+    @Query("SELECT m FROM Meeting m WHERE m.team.id = :teamId ORDER BY ")
     List<Meeting> findAllByTeam(@Param("teamId") Long teamId);
+
+    List<Meeting> findAllByTeamIdOrderByTimeAsc(Long teamId);
 }

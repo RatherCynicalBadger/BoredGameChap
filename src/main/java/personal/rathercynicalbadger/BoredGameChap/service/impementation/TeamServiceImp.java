@@ -10,6 +10,7 @@ import personal.rathercynicalbadger.BoredGameChap.service.TeamService;
 @AllArgsConstructor
 public class TeamServiceImp implements TeamService {
     private TeamRepository teamRepo;
+
     @Override
     public Team findById(Long teamId) {
         return teamRepo.findById(teamId).orElseThrow();

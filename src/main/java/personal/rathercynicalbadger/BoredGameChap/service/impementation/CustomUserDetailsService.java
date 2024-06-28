@@ -19,6 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
     private UserService userService;
+
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -22,6 +22,7 @@ public class BGGAPIServiceImp implements BGGAPIService {
     private final String BGG_URL = "https://boardgamegeek.com/xmlapi/";
     private final String BGG_SEARCH = "search?search=";
     private final String BGG_BOARDGAME = "boardgame/";
+
     @Override
     public Map<Integer, String> searchByTitle(String title) {
         try {

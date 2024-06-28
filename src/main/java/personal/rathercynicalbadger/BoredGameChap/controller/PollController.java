@@ -5,10 +5,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import personal.rathercynicalbadger.BoredGameChap.entity.Poll;
 import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
 import personal.rathercynicalbadger.BoredGameChap.service.MeetingService;
@@ -42,21 +39,16 @@ public class PollController {
         return "redirect:/bgc/team/" + teamId;
     }
 
-    /**
-     * For fetching poll details using id
-     * @param pollId - id of poll to fetch
-     * @return - poll object
-     */
-    @GetMapping("/bgc/get-poll/{pollId}")
-    public Poll pollDetails(@PathVariable Long pollId) {
-        return pollService.findById(pollId);
-    }
+    @PostMapping("/bgc/poll/{pollId}/vote")
+    public String registerVote(@PathVariable Long pollId, @RequestParam String g) {
+        Poll poll = pollService.findById(pollId);
+        switch (g) {
+            case "g1" -> poll.setScore1(poll.getScore1() + 1);
+            case "g2" -> poll.setScore1(poll.getScore2() + 1);
+            case "g3" -> poll.setScore1(poll.getScore3() + 1);
+            case "g4" -> poll.setScore1(poll.getScore4() + 1);
+        }
 
-    public void deletePoll(long pollId) {
-        pollService.deleteById(pollId);
-    }
-
-    public void updatePoll(Poll poll) {
-        pollService.save(poll);
+        return "redirect:/bgc/team/" + poll.getMeeting().getTeam().getId();
     }
 }

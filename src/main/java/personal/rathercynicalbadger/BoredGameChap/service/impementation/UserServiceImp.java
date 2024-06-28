@@ -14,6 +14,7 @@ public class UserServiceImp implements UserService {
     private final UserRepository userRepo;
     private final RoleRepository roleRepo;
     private final BCryptPasswordEncoder pswEncoder;
+
     @Override
     public User findById(Long userId) {
         return userRepo.findById(userId).orElseThrow();

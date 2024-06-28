@@ -2,11 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Group dashboard</title>
+    <title>Team dashboard</title>
 </head>
 <body>
 <div>
-    <p>Info goes here</p>
+    <p th:text="${team.name}"/>
+    <p th:text="${team.location}"/>
+    <p th:text="${team.about}"/>
 </div>
 <div>
     <section class="meeting-section">
@@ -22,17 +24,11 @@
                         <span th:text="${meeting.time}"/>
                         <span th:text="${meeting.location}"/>
                         <span th:text="${meeting.message}"/>
+                        <a th:if="${meeting.poll != null}"
+                           th:href="@{/bgc/team/{teamId}/meeting/{meetingId}/details(teamId=${team.id}, meetingId=${meeting.id})}">
+                            You can vote for a game here</a>
                     </h3>
                 </div>
-<!--                TODO Use /bgc/poll/{pollId} to fetch data using JS-->
-<!--                <th:block th:if="${meeting.poll} != null">-->
-<!--                    <a href="#">-->
-<!--                        <span>Vote in poll</span>-->
-<!--                        <span class="icon-button">-->
-<!--								<i class="ph-caret-right-bold"></i>-->
-<!--							</span>-->
-<!--                    </a>-->
-<!--                </th:block>-->
             </article>
         </div>
     </section>

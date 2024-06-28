@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MeetingServiceImp implements MeetingService {
     private final MeetingRepository meetingRepo;
+
     @Override
     public Meeting save(Meeting meeting) {
         return meetingRepo.save(meeting);
@@ -23,7 +24,7 @@ public class MeetingServiceImp implements MeetingService {
     }
 
     @Override
-    public List<Meeting> findAllByTeamId(Long teamId) {
-        return meetingRepo.findAllByTeam(teamId);
+    public List<Meeting> findAllByTeamIdOrderedByTime(Long teamId) {
+        return meetingRepo.findAllByTeamIdOrderByTimeAsc(teamId);
     }
 }

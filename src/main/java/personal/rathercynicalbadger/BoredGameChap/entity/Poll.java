@@ -15,7 +15,7 @@ public class Poll {
     private Meeting meeting;
     @OneToOne
     private User creator;
-//    @ManyToMany
+    //    @ManyToMany
 //    @JoinTable(
 //            name = "poll_game",
 //            joinColumns = @JoinColumn(name = "poll_id"),

@@ -24,7 +24,7 @@ public class SpringSecurityConfig {
         http
                 .authenticationManager(authenticationManager)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/home/**", "/templates/**").permitAll()
+                                .requestMatchers("/home/**", "/templates/**").permitAll()
 //                        .requestMatchers("/bgc/**").hasAuthority("USER")
 //                        .requestMatchers("/bgc/team/*/admin/**").hasAuthority("GROUP_ADMIN")
 //                        .anyRequest().authenticated()
