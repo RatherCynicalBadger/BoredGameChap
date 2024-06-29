@@ -2,11 +2,13 @@ package personal.rathercynicalbadger.BoredGameChap.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import personal.rathercynicalbadger.BoredGameChap.entity.Team;
 import personal.rathercynicalbadger.BoredGameChap.entity.User;
+import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
 import personal.rathercynicalbadger.BoredGameChap.service.MeetingService;
 import personal.rathercynicalbadger.BoredGameChap.service.TeamService;
 import personal.rathercynicalbadger.BoredGameChap.service.UserService;
@@ -34,10 +36,9 @@ public class TeamController {
 
     @PostMapping("/bgc/team/create")
     public String createTeamAction(@ModelAttribute Team teamToCreate,
-                                   @RequestParam Long teamAdminId) {
-        teamToCreate.setTeamAdminId(teamAdminId);
-        User user = userService.findById(teamAdminId);
-        teamToCreate.getMembers().add(user);
+                                   @AuthenticationPrincipal CurrentUser currentUser) {
+        teamToCreate.setTeamAdminId(currentUser.getUser().getId());
+        teamToCreate.getMembers().add(currentUser.getUser());
         teamService.save(teamToCreate);
         teamToCreate = teamService.findByName(teamToCreate.getName());
         return "redirect:/bgc/team/" + teamToCreate.getId();

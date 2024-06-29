@@ -51,4 +51,16 @@ public class UserController {
         userService.save(user);
         return "redirect:/bgc/game/owned";
     }
+
+    @GetMapping("/bgc/account")
+    public String accountDetails(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+        model.addAttribute("userDetails", currentUser.getUser());
+        return "/bgc/account-details";
+    }
+
+    @GetMapping("/bgc/delete_account")
+    public String deleteUser(@AuthenticationPrincipal CurrentUser currentUser) {
+        userService.delete(currentUser.getUser());
+        return "redirect:/logout";
+    }
 }

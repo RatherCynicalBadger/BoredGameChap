@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <header th:fragment="header" class="app-header">
     <div class="app-header-logo">
         <div class="logo">
 				<span class="logo-icon">
-					<img src="" alt="LOGO"/>
+					<img src="/images/logo.png" alt="LOGO"/>
 				</span>
             <h1 class="logo-title">
                 <span>BoardGameChap</span>
@@ -21,23 +22,21 @@
             <a href="#" class="active">
                 Overview
             </a>
-            <a th:href="@{~/bgc/game/owned}">
+            <a th:href="@{/bgc/game/owned}" class="active">
                 Games
             </a>
-            <a th:href="@{~/bgc/joined_teams}">
+            <a th:href="@{/bgc/joined_teams}" class="active">
                 Teams
             </a>
         </div>
     </div>
     <div class="app-header-actions">
-        <button class="user-profile" th:formaction="@{~/bgc/account}">
-            <span th:text="${#authentication.name}"/>
-            <!--            <span>-->
-            <!--					<img src="" alt="profile pic goes here"/>-->
-            <!--				</span>-->
-        </button>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit">LOGOUT</button>
+        <form th:action="@{~/bgc/account}" method="get">
+            <button class="user-profile" th:formaction="@{/bgc/account}">
+                <span th:text="${#authentication.name}"/>
+                <span><img src="/images/user-logo.webp" alt="profile pic goes here"/></span>
+            </button>
+            <button type="submit" th:formaction="@{/logout}">LOGOUT</button>
         </form>
     </div>
 </header>

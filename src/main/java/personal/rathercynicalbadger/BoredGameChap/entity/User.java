@@ -29,7 +29,7 @@ public class User {
     )
     @JsonIgnore
     private List<Game> ownedGames;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "user_team",
             joinColumns = @JoinColumn(name = "user_id"),

@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Teams you joined</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<div th:each="team:${teams}">
-    <ul>
-        <li th:text="${team.name}"/>
-        <li th:text="${team.about}"/>
-        <li th:text="${team.location}"/>
-    </ul>
-    <form th:action="@{~/bgc/team/{teamId}(teamId=${team.id})}" method="get">
-        <button type="submit">VISIT</button>
-    </form>
+<div th:insert="~{fragments/header.html :: header}"></div>
+<div class="app-body">
+    <div th:each="team:${teams}">
+        <ol class="alternating-colors">
+            <li th:text="${team.name}"/>
+            <li th:text="${team.about}"/>
+            <li th:text="${team.location}"/>
+        </ol>
+        <form th:action="@{~/bgc/team/{teamId}(teamId=${team.id})}" method="get">
+            <button type="submit">VISIT</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

@@ -10,43 +10,31 @@
 <div class="app-body">
     <!--    <div th:insert="fragments/sidebar.html :: sidebar"></div>-->
     <div class="app-body-main-content">
-        <section class="meeting-section">
-            <h2>Upcoming meetings</h2>
+        <section class="actions-section">
+            <h2>Actions</h2>
             <div class="tiles">
                 <article class="tile">
                     <div class="tile-header">
                         <i class="ph-lightning-light"></i>
-                        <h3>
-                            <span>PLACEHOLDER</span>
-                        </h3>
                     </div>
-                    <a href="#">
-                        <span>Go to meeting</span>
-                        <span class="icon-button">
-								<i class="ph-caret-right-bold"></i>
-							</span>
+                    <a th:href="@{/bgc/game/add}">
+                        <span>Add game</span>
                     </a>
                 </article>
-            </div>
-        </section>
-        <section class="game-section">
-            <div class="game-section-header">
-                <h2>Latest games</h2>
-                <div class="filter-options">
-                    <p>Filter selected: </p>
-                    <button class="icon-button">
-                        <i class="ph-funnel"></i>
-                    </button>
-                    <button class="icon-button">
-                        <i class="ph-plus"></i>
-                    </button>
-                </div>
+                <article class="tile">
+                    <div class="tile-header">
+                        <i class="ph-lightning-light"></i>
+                    </div>
+                    <a th:href="@{/bgc/team/create}">
+                        <span>Create your own team</span>
+                    </a>
+                </article>
             </div>
         </section>
     </div>
     <div class="app-body-invitebar">
         <section class="invite-section">
-            <h2>Invites sidebar</h2>
+            <h2>Invites</h2>
             <div class="invites" th:each="invite:${invites}">
                 <div class="invite">
                     <div class="card green">
@@ -65,6 +53,8 @@
         </section>
     </div>
 </div>
+<br>
+<br>
 <div th:insert="~{fragments/footer.html :: footer}"></div>
 </body>
 </html>
