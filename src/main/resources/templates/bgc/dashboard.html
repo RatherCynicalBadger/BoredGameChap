@@ -14,17 +14,11 @@
             <h2>Actions</h2>
             <div class="tiles">
                 <article class="tile">
-                    <div class="tile-header">
-                        <i class="ph-lightning-light"></i>
-                    </div>
                     <a th:href="@{/bgc/game/add}">
                         <span>Add game</span>
                     </a>
                 </article>
                 <article class="tile">
-                    <div class="tile-header">
-                        <i class="ph-lightning-light"></i>
-                    </div>
                     <a th:href="@{/bgc/team/create}">
                         <span>Create your own team</span>
                     </a>
@@ -42,7 +36,7 @@
                         <span th:text="${invite.teamName}"/>
                     </div>
                     <div class="invite-details">
-                        <form action="" method="post">
+                        <form th:action="@{~/bgc/invite/accept}" method="post">
                             <input type="hidden" name="inviteId" th:value="${invite.id}">
                             <button type="submit" th:formaction="@{~/bgc/invite/accept}">ACCEPT</button>
                             <button type="submit" th:formaction="@{~/bgc/invite/reject}">REJECT</button>

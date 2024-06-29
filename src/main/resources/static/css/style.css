@@ -598,6 +598,7 @@ details summary::-webkit-details-marker {
     background-color: var(--c-olive-500);
     color: var(--c-gray-900);
     min-height: 200px;
+    min-width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

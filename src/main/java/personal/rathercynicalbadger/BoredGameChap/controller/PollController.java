@@ -44,10 +44,11 @@ public class PollController {
         Poll poll = pollService.findById(pollId);
         switch (g) {
             case "g1" -> poll.setScore1(poll.getScore1() + 1);
-            case "g2" -> poll.setScore1(poll.getScore2() + 1);
-            case "g3" -> poll.setScore1(poll.getScore3() + 1);
-            case "g4" -> poll.setScore1(poll.getScore4() + 1);
+            case "g2" -> poll.setScore2(poll.getScore2() + 1);
+            case "g3" -> poll.setScore3(poll.getScore3() + 1);
+            case "g4" -> poll.setScore4(poll.getScore4() + 1);
         }
+        pollService.save(poll);
 
         return "redirect:/bgc/team/" + poll.getMeeting().getTeam().getId();
     }

@@ -42,6 +42,6 @@ public class MeetingController {
         if (m.getPoll() != null) {
             model.addAttribute("poll", m.getPoll());
         }
-        return "/bgc/team/" + teamId + "meeting/" + meetingId + "/details";
+        return "/bgc/team/meeting/details";
     }
 }

@@ -24,7 +24,7 @@ public class User {
     //TODO for testing only, change later
     @Size(min = 2)
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_game",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -32,7 +32,7 @@ public class User {
     )
     @JsonIgnore
     private List<Game> ownedGames;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_team",
             joinColumns = @JoinColumn(name = "user_id"),

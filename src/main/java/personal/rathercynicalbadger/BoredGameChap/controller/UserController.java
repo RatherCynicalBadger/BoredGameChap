@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import personal.rathercynicalbadger.BoredGameChap.entity.Game;
+import personal.rathercynicalbadger.BoredGameChap.entity.Team;
 import personal.rathercynicalbadger.BoredGameChap.entity.User;
 import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
 import personal.rathercynicalbadger.BoredGameChap.service.GameService;
 import personal.rathercynicalbadger.BoredGameChap.service.InviteService;
 import personal.rathercynicalbadger.BoredGameChap.service.UserService;
+
+import java.util.List;
 
 @Controller
 @Secured("ROLE_USER")
@@ -38,7 +41,8 @@ public class UserController {
 
     @GetMapping("/bgc/joined_teams")
     public String showJoinedTeams(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
-        model.addAttribute("teams", currentUser.getUser().getTeams());
+        List<Team> teams = currentUser.getUser().getTeams();
+        model.addAttribute("teams", teams);
         return "/bgc/joined-teams";
     }
 

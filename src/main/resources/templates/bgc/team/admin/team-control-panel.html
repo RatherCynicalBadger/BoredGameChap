@@ -5,6 +5,7 @@
     <title>Team control panel</title>
 </head>
 <body>
+<div th:insert="~{fragments/header.html :: header}"></div>
 <div>
     <h5>Invite new member</h5>
     <form th:action="@{~/bgc/team/invite}" method="post">

@@ -13,6 +13,9 @@
 </div>
 <div>
     <section class="meeting-section">
+        <div>
+            <a th:href="@{/bgc/team/{teamId}/meeting/create(teamId=${team.id})}">Create meeting</a>
+        </div>
         <h2>Meetings</h2>
         <div class="meeting-section-header">
             Meetings
@@ -28,6 +31,9 @@
                         <a th:if="${meeting.poll != null}"
                            th:href="@{/bgc/team/{teamId}/meeting/{meetingId}/details(teamId=${team.id}, meetingId=${meeting.id})}">
                             You can vote for a game here</a>
+                        <a th:if="${meeting.poll == null}"
+                           th:href="@{/bgc/team/{teamId}/meeting/{meetingId}/poll(teamId=${team.id}, meetingId=${meeting.id})}">
+                            You can create a poll here</a>
                     </h3>
                 </div>
             </article>
