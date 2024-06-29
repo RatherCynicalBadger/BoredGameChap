@@ -16,7 +16,6 @@ import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 @AllArgsConstructor
 public class GameController {
     private final GameService gameService;
-    private final UserService userService;
     private final BGGAPIService apiService;
 
     @GetMapping("/bgc/game/add")
@@ -36,20 +35,11 @@ public class GameController {
         return "/bgc/add-game-list";
     }
 
-//    @RequestMapping("/bgc/add_game")
-//    public void addGameAction(@ModelAttribute Game gameToAdd, @AuthenticationPrincipal CurrentUser currentUser) {
-//        User user = userService.findById(currentUser.getUser().getId());
-//        List<Game> userGames = gameService.findAllOwnedByUser(currentUser.getUser());
-//        user.setOwnedGames(userGames);
-//        userService.save(user);
-//    }
-
     @PostMapping("/bgc/game/add_to_local_db")
-    public String addGameFromAPIToDB(Model model, @RequestParam Integer bggId) {
+    public String addGameFromAPIToDB(@RequestParam Long bggId) {
         Game game = apiService.fetchGame(bggId);
         game = gameService.save(game);
-        model.addAttribute("gameToAdd", game);
-        return "forward:/bgc/game/add_to_collection";
+        return "redirect:/bgc/game/add_to_collection?gameId=" + game.getId();
     }
 
     @GetMapping("/bgc/game/add_by_hand")

@@ -9,7 +9,7 @@
     <h5>Invite new member</h5>
     <form th:action="@{~/bgc/team/invite}" method="post">
         <input type="text" name="username" placeholder="Enter username here">
-        <input type="hidden" name="teamId" th:value="1">
+        <input type="hidden" name="teamId" th:value="${teamId}">
         <button type="submit">SEND INVITE</button>
     </form>
 </div>

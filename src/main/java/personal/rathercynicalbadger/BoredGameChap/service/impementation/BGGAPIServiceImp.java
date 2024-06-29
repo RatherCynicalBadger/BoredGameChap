@@ -52,7 +52,7 @@ public class BGGAPIServiceImp implements BGGAPIService {
     }
 
     @Override
-    public Game fetchGame(Integer bggId) {
+    public Game fetchGame(Long bggId) {
         try {
             Game game = new Game();
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();

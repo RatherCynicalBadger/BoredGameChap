@@ -11,12 +11,42 @@
     <th:block th:each="game:${owned}">
         <div class="alternating-colors">
             <ol>
-                <li th:text="${game.title}"/>
-                <li th:text="${game.description}"/>
-                <li th:text="${game.minPlayers}"/>
-                <li th:text="${game.maxPlayers}"/>
-                <li th:text="${game.playtime}"/>
-                <li th:text="${game.released}"/>
+                <li>
+                    <dl>
+                        <dt>Title</dt>
+                        <dd th:text="${game.title}"/>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Description</dt>
+                        <dd th:text="${game.description}"/>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Min. players</dt>
+                        <dd th:text="${game.minPlayers}"/>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Max players</dt>
+                        <dd th:text="${game.maxPlayers}"/>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Playtime</dt>
+                        <dd th:text="${game.playtime}"/>
+                    </dl>
+                </li>
+                <li>
+                    <dl>
+                        <dt>Released</dt>
+                        <dd th:text="${game.released}"/>
+                    </dl>
+                </li>
             </ol>
         </div>
     </th:block>

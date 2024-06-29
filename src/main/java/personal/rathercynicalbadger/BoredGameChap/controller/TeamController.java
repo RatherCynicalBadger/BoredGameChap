@@ -18,13 +18,13 @@ import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 @AllArgsConstructor
 public class TeamController {
     private final TeamService teamService;
-    private final UserService userService;
     private final MeetingService meetingService;
 
     @GetMapping("/bgc/team/{teamId}")
-    public String teamDashboard(@PathVariable Long teamId, Model model) {
+    public String teamDashboard(@PathVariable Long teamId, Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         model.addAttribute("team", teamService.findById(teamId));
         model.addAttribute("meetings", meetingService.findAllByTeamIdOrderedByTime(teamId));
+        model.addAttribute("userId", currentUser.getUser().getId());
         return "/bgc/team/team-dashboard";
     }
 
