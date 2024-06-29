@@ -33,6 +33,6 @@ public class HomepageController {
     @PostMapping("/home/register")
     public String register(@ModelAttribute User user) {
         userService.save(user);
-        return "/bgc/dashboard";
+        return "redirect:/bgc";
     }
 }

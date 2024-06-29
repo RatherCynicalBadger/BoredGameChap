@@ -5,6 +5,7 @@
     <title>Team dashboard</title>
 </head>
 <body>
+<div th:insert="~{fragments/header.html :: header}"></div>
 <div>
     <p th:text="${team.name}"/>
     <p th:text="${team.location}"/>

@@ -18,27 +18,27 @@
     </div>
     <div class="app-header-navigation">
         <div class="tabs">
-            <a href="#">
+            <a href="#" class="active">
                 Overview
             </a>
-            <a href="#" class="active">
-                Meetings
-            </a>
-            <a href="#">
-                Groups
-            </a>
-            <a href="#">
+            <a th:href="@{~/bgc/game/owned}">
                 Games
+            </a>
+            <a th:href="@{~/bgc/joined_teams}">
+                Teams
             </a>
         </div>
     </div>
     <div class="app-header-actions">
-        <button class="user-profile">
+        <button class="user-profile" th:formaction="@{~/bgc/account}">
             <span th:text="${#authentication.name}"/>
             <!--            <span>-->
             <!--					<img src="" alt="profile pic goes here"/>-->
             <!--				</span>-->
         </button>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">LOGOUT</button>
+        </form>
     </div>
 </header>
 </body>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Teams you joined</title>
+</head>
+<body>
+<div th:each="team:${teams}">
+    <ul>
+        <li th:text="${team.name}"/>
+        <li th:text="${team.about}"/>
+        <li th:text="${team.location}"/>
+    </ul>
+    <form th:action="@{~/bgc/team/{teamId}(teamId=${team.id})}" method="get">
+        <button type="submit">VISIT</button>
+    </form>
+</div>
+</body>
+</html>

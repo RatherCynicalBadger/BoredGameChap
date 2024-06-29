@@ -15,14 +15,6 @@ public class Poll {
     private Meeting meeting;
     @OneToOne
     private User creator;
-    //    @ManyToMany
-//    @JoinTable(
-//            name = "poll_game",
-//            joinColumns = @JoinColumn(name = "poll_id"),
-//            inverseJoinColumns = @JoinColumn(name = "game_id")
-//    )
-//    @JsonIgnore
-//    private List<Game> suggestedGames = new ArrayList<>();
     private String name1;
     private String name2;
     private String name3;

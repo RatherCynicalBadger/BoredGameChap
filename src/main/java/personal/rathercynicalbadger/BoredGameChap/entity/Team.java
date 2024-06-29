@@ -21,10 +21,6 @@ public class Team {
      * Approximate location of the team.
      */
     private String location;
-    //    /**
-//     * True if team is private and only accept new members via invite.
-//     */
-//    private boolean privateTeam;
     private Long teamAdminId;
     @ManyToMany
     @JoinTable(

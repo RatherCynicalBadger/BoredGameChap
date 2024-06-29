@@ -22,7 +22,7 @@
         <input type="number" th:field="*{playtime}" min="1">
     </label>
     <label>
-        <input type="date" th:field="*{released}">
+        <input type="number" th:min="1900" th:max="2100" placeholder="YYYY" th:field="*{released}">
     </label>
     <button type="submit">Add to your collection</button>
 </form>

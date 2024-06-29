@@ -13,16 +13,17 @@ import personal.rathercynicalbadger.BoredGameChap.entity.User;
 import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
 import personal.rathercynicalbadger.BoredGameChap.service.GameService;
 import personal.rathercynicalbadger.BoredGameChap.service.InviteService;
+import personal.rathercynicalbadger.BoredGameChap.service.TeamService;
 import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 
 @Controller
+@Secured("ROLE_USER")
 @AllArgsConstructor
 public class UserController {
     private final UserService userService;
     private final GameService gameService;
     private final InviteService inviteService;
 
-    @Secured("ROLE_USER")
     @GetMapping("/bgc")
     public String showUserDashboard(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         model.addAttribute("ownedGames", gameService.findAllOwnedByUser(currentUser.getUser()));
@@ -30,15 +31,18 @@ public class UserController {
         return "/bgc/dashboard";
     }
 
-    @Secured("ROLE_USER")
     @GetMapping("/bgc/game/owned")
-    public String listOwnedGames(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+    public String showOwnedGames(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         model.addAttribute("owned", gameService.findAllOwnedByUser(currentUser.getUser()));
         return "/bgc/owned-games";
     }
 
-    @Secured("ROLE_USER")
-    //TODO fix Hibernate weirding out with update queries
+    @GetMapping("/bgc/joined_teams")
+    public String showJoinedTeams(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
+        model.addAttribute("teams", currentUser.getUser().getTeams());
+        return "/bgc/joined-teams";
+    }
+
     @RequestMapping("/bgc/game/add_to_collection")
     public String addToUserCollection(@RequestParam Long gameId, @AuthenticationPrincipal CurrentUser currentUser) {
         User user = currentUser.getUser();

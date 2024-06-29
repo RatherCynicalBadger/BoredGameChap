@@ -6,6 +6,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import personal.rathercynicalbadger.BoredGameChap.entity.Team;
 
+import java.util.List;
+
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Long> {
 

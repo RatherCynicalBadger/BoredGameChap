@@ -27,10 +27,12 @@ public class SpringSecurityConfig {
                                 .requestMatchers("/home/**", "/templates/**").permitAll()
 //                        .requestMatchers("/bgc/**").hasAuthority("USER")
 //                        .requestMatchers("/bgc/team/*/admin/**").hasAuthority("GROUP_ADMIN")
-//                        .anyRequest().authenticated()
+                        .anyRequest().authenticated()
                 ).formLogin(l -> l
                         .defaultSuccessUrl("/bgc"))
-                .logout(LogoutConfigurer::permitAll)
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/home")
+                        .permitAll())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .exceptionHandling(eh -> eh.accessDeniedPage("/403"));
         return http.build();
