@@ -13,7 +13,6 @@ import personal.rathercynicalbadger.BoredGameChap.entity.User;
 import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
 import personal.rathercynicalbadger.BoredGameChap.service.GameService;
 import personal.rathercynicalbadger.BoredGameChap.service.InviteService;
-import personal.rathercynicalbadger.BoredGameChap.service.TeamService;
 import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 
 @Controller

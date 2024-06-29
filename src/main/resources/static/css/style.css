@@ -41,11 +41,6 @@ blockquote, q {
     quotes: none;
 }
 
-blockquote:after, blockquote:before, q:after, q:before {
-    content: "";
-    content: none;
-}
-
 table {
     border-collapse: collapse;
     border-spacing: 0;
@@ -714,4 +709,8 @@ strong { color: #292929; }
 ol.alternating-colors {
     & li:nth-child(odd):before { border-color: #0BAD02; }
     & li:nth-child(even):before { border-color: #2378D5; }
+}
+
+.error {
+    color: red;
 }

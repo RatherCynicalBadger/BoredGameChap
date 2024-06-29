@@ -26,5 +26,6 @@
     </label>
     <button type="submit">Add to your collection</button>
 </form>
+<p th:each="err : ${#fields.errors('gameToAdd.*')}" th:text="${err}" class="error"/>
 </body>
 </html>

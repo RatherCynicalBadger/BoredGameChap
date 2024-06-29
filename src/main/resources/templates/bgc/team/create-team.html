@@ -11,5 +11,6 @@
     <input type="text" th:field="*{about}" placeholder="Write something about the team here..."><br>
     <button type="submit">CREATE</button>
 </form>
+<p th:each="err : ${#fields.errors('teamToCreate.*')}" th:text="${err}" class="error"/>
 </body>
 </html>

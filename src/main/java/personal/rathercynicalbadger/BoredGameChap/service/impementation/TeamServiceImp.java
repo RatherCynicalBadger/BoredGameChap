@@ -6,8 +6,6 @@ import personal.rathercynicalbadger.BoredGameChap.entity.Team;
 import personal.rathercynicalbadger.BoredGameChap.repository.TeamRepository;
 import personal.rathercynicalbadger.BoredGameChap.service.TeamService;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class TeamServiceImp implements TeamService {
