@@ -5,13 +5,14 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import personal.rathercynicalbadger.BoredGameChap.entity.Team;
-import personal.rathercynicalbadger.BoredGameChap.entity.User;
 import personal.rathercynicalbadger.BoredGameChap.security.CurrentUser;
 import personal.rathercynicalbadger.BoredGameChap.service.MeetingService;
 import personal.rathercynicalbadger.BoredGameChap.service.TeamService;
-import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 
 @Controller
 @Secured("ROLE_USER")
@@ -47,7 +48,16 @@ public class TeamController {
     @Secured("ROLE_TEAM_ADMIN")
     @GetMapping("/bgc/team/{teamId}/admin")
     public String teamAdminPanel(@PathVariable Long teamId, Model model) {
-        model.addAttribute("teamId", teamId);
+        model.addAttribute("team", teamService.findById(teamId));
         return "/bgc/team/admin/team-control-panel";
+    }
+
+    @PostMapping("/bgc/team/{teamId}/edit")
+    public String submitChanges(@ModelAttribute Team team, @PathVariable Long teamId) {
+        Team toUpdate = teamService.findById(teamId);
+        toUpdate.setLocation(team.getLocation());
+        toUpdate.setAbout(team.getAbout());
+        teamService.save(toUpdate);
+        return "redirect:/bgc/team/" + teamId;
     }
 }

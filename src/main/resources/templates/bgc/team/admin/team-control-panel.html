@@ -9,13 +9,19 @@
     <h5>Invite new member</h5>
     <form th:action="@{~/bgc/team/invite}" method="post">
         <input type="text" name="username" placeholder="Enter username here">
-        <input type="hidden" name="teamId" th:value="${teamId}">
+        <input type="hidden" name="teamId" th:value="${team.id}">
         <button type="submit">SEND INVITE</button>
     </form>
 </div>
 <div>
-    <h5>Edit team data</h5>
-    <!--    TODO update, delete goes here-->
+    <h5>Team management</h5>
+    <form th:action="@{/bgc/team/{teamId}/edit(teamId=${team.id})}" method="post" th:object="${team}">
+        <label for="loc">Location</label>
+        <input type="text" id="loc" th:value="${team.location}" th:text="${team.location}" th:field="*{location}"/>
+        <label for="about">About</label>
+        <input type="text" id="about" th:value="${team.about}" th:text="${team.about}" th:field="*{about}"/>
+        <button type="submit">EDIT</button>
+    </form>
 </div>
 </body>
 </html>

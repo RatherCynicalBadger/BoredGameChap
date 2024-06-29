@@ -3,7 +3,7 @@ package personal.rathercynicalbadger.BoredGameChap.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,13 +17,14 @@ public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotEmpty
     @Column
     private String title;
-    @Column(length = 1000)
+    @Column(length = 2000)
     private String description;
     @Min(1)
     private byte minPlayers;
+    @Min(1)
     private byte maxPlayers;
     private Year released;
     /**

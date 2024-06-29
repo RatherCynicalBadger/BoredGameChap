@@ -1,8 +1,10 @@
 package personal.rathercynicalbadger.BoredGameChap.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import personal.rathercynicalbadger.BoredGameChap.entity.Game;
 import personal.rathercynicalbadger.BoredGameChap.service.BGGAPIService;
 import personal.rathercynicalbadger.BoredGameChap.service.GameService;
-import personal.rathercynicalbadger.BoredGameChap.service.UserService;
 
 @Controller
 @AllArgsConstructor
@@ -49,8 +50,12 @@ public class GameController {
     }
 
     @PostMapping("/bgc/game/add_by_hand")
-    public String addGameToDB(@ModelAttribute(name = "gameToAdd") Game gameToAdd) {
+    public String addGameToDB(@Valid @ModelAttribute(name = "gameToAdd") Game gameToAdd, BindingResult br) {
+        if (br.hasErrors()) {
+            return "/bgc/add-game-by-hand";
+        }
         gameToAdd = gameService.save(gameToAdd);
         return "redirect:/bgc/game/add_to_collection?gameId=" + gameToAdd.getId();
     }
+
 }

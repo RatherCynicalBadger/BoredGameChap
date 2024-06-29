@@ -33,7 +33,7 @@
             </article>
         </div>
     </section>
-    <section th:if="${team.teamAdminId == ${userId}}">
+    <section th:if="${team.teamAdminId == userId}">
         <a th:href="@{/bgc/team/{teamId}/admin(teamId=${team.id})}">TEAM ADMIN PANEL</a>
     </section>
 </div>

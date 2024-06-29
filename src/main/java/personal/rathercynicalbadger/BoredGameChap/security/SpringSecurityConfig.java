@@ -8,7 +8,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,9 +23,7 @@ public class SpringSecurityConfig {
         http
                 .authenticationManager(authenticationManager)
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/home/**", "/templates/**").permitAll()
-//                        .requestMatchers("/bgc/**").hasAuthority("USER")
-//                        .requestMatchers("/bgc/team/*/admin/**").hasAuthority("GROUP_ADMIN")
+                        .requestMatchers("/home/**", "/templates/**").permitAll()
                         .anyRequest().authenticated()
                 ).formLogin(l -> l
                         .defaultSuccessUrl("/bgc"))
